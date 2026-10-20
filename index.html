@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TryExam - CCNA 200-301 İmtahan Simulyatoru</title>
+  <meta name="description" content="Azərbaycan dilində CCNA hazırlığı: 181 sual, imtahan, matching və IOS lab tapşırıqları.">
+  <style>
+    :root {
+      --bg: #f4f6f9; --card: #ffffff; --text: #1d2733; --muted: #5d6b7a;
+      --accent: #0b5cad; --accent-2: #083f78; --ok: #1a7f37; --bad: #b42318;
+      --warn: #b54708; --border: #d7dee7; --flag: #f5b400;
+      --font: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.5; }
+    header { background: var(--accent-2); color: #fff; padding: 14px 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+    header h1 { font-size: 20px; margin: 0; letter-spacing: .5px; }
+    header span { font-size: 13px; opacity: .85; }
+    main { max-width: 980px; margin: 24px auto; padding: 0 16px; }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 24px; margin-bottom: 18px; box-shadow: 0 1px 2px rgba(0,0,0,.04); }
+    h2 { margin-top: 0; font-size: 22px; }
+    h3 { margin: 0 0 8px; font-size: 17px; }
+    .muted { color: var(--muted); font-size: 14px; }
+    .btn { display: inline-block; border: 0; border-radius: 7px; padding: 10px 18px; font-size: 15px; cursor: pointer; background: var(--accent); color: #fff; text-decoration: none; font-family: inherit; }
+    .btn:hover { background: var(--accent-2); }
+    .btn.secondary { background: #e6ecf3; color: var(--text); }
+    .btn.secondary:hover { background: #d3dde9; }
+    .btn.flag { background: #fff6d6; color: #6b5200; border: 1px solid var(--flag); }
+    .btn.linkedin { background: #0a66c2; }
+    .btn:disabled { opacity: .5; cursor: not-allowed; }
+    .btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
+    input[type=text] { width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 7px; font-size: 15px; font-family: inherit; }
+    label { font-weight: 600; font-size: 14px; display: block; margin-bottom: 6px; }
+    .rules li { margin-bottom: 6px; }
+    .timer { font-variant-numeric: tabular-nums; font-weight: 700; font-size: 18px; background: rgba(255,255,255,.15); padding: 6px 12px; border-radius: 6px; }
+    .timer.low { background: var(--warn); }
+    .progress { height: 8px; background: #e3e9f0; border-radius: 4px; overflow: hidden; margin: 10px 0 18px; }
+    .progress > div { height: 100%; background: var(--accent); transition: width .2s; }
+    .qnav { display: grid; grid-template-columns: repeat(auto-fill, minmax(42px, 1fr)); gap: 6px; margin-top: 12px; }
+    .qnav button { padding: 8px 0; border: 1px solid var(--border); background: #fff; border-radius: 6px; cursor: pointer; font-family: inherit; font-size: 13px; }
+    .qnav button.answered { background: #dbeafe; border-color: #93c5fd; }
+    .qnav button.flagged { background: #fff6d6; border-color: var(--flag); }
+    .qnav button.current { outline: 2px solid var(--accent); }
+    .opt { display: flex; gap: 10px; align-items: flex-start; padding: 12px 14px; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 10px; cursor: pointer; }
+    .opt:hover { background: #f7fafd; }
+    .opt input { margin-top: 4px; }
+    .opt.selected { border-color: var(--accent); background: #eef5fc; }
+    .domain-tag { display: inline-block; font-size: 12px; background: #e6ecf3; color: var(--muted); padding: 2px 8px; border-radius: 4px; margin-bottom: 10px; }
+    .result-big { font-size: 46px; font-weight: 800; }
+    .pass { color: var(--ok); } .fail { color: var(--bad); }
+    .bar { height: 10px; background: #e3e9f0; border-radius: 5px; overflow: hidden; }
+    .bar > div { height: 100%; background: var(--accent); }
+    .domain-row { margin-bottom: 14px; }
+    .review-item { border-left: 4px solid var(--border); padding: 10px 14px; margin-bottom: 12px; background: #fafbfc; border-radius: 6px; }
+    .review-item.right { border-color: var(--ok); }
+    .review-item.wrong { border-color: var(--bad); }
+    .explain { font-size: 14px; color: var(--muted); margin-top: 6px; }
+    .hidden { display: none !important; }
+    .disclaimer { font-size: 12px; color: var(--muted); border-top: 1px solid var(--border); margin-top: 24px; padding-top: 12px; }
+    .cert-preview { width: 100%; border: 1px solid var(--border); border-radius: 8px; margin: 12px 0; }
+    footer { text-align: center; color: var(--muted); font-size: 12px; padding: 24px 12px 40px; }
+    footer a { color: var(--accent); }
+    .pre { white-space: pre-line; }
+    .match-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 8px; }
+    .match-col { background: #f7f9fc; border: 1px solid var(--border); border-radius: 8px; padding: 12px; }
+    .match-head { font-weight: 700; font-size: 14px; color: var(--muted); margin-bottom: 8px; }
+    .slot-row { margin-bottom: 12px; }
+    .slot-name { font-size: 15px; margin-bottom: 4px; }
+    .drop { min-height: 44px; border: 2px dashed #b8c6d6; border-radius: 7px; padding: 10px; background: #fff; color: var(--muted); font-size: 14px; cursor: pointer; }
+    .drop.filled { border-style: solid; border-color: var(--accent); color: var(--text); background: #eef5fc; }
+    .drop.over { border-color: var(--accent); background: #dbeafe; }
+    .chip { padding: 10px 12px; margin-bottom: 8px; background: #fff; border: 1px solid var(--border); border-radius: 7px; font-size: 14px; cursor: grab; user-select: none; }
+    .chip:hover { border-color: var(--accent); }
+    .chip.selected { border-color: var(--accent); background: #dbeafe; outline: 2px solid var(--accent); }
+    .topo-wrap { margin: 8px 0 14px; }
+    svg.topo { width: 100%; max-width: 640px; height: auto; background: #fbfdff; border: 1px solid var(--border); border-radius: 8px; display: block; }
+    svg.topo .lnk { stroke: #7a8ca0; stroke-width: 2.5; }
+    svg.topo .ifl { font: 600 12px Consolas, "Courier New", monospace; fill: #334155; }
+    svg.topo .lbl { font: 11px "Segoe UI", Arial, sans-serif; fill: #5d6b7a; text-anchor: middle; }
+    svg.topo .dev { stroke-width: 2; }
+    svg.topo .dev-router { fill: #dbeafe; stroke: #0b5cad; }
+    svg.topo .dev-switch { fill: #dcfce7; stroke: #15803d; }
+    svg.topo .dev-pc { fill: #f3f4f6; stroke: #6b7280; }
+    svg.topo .dn { font: 700 14px "Segoe UI", Arial, sans-serif; fill: #1d2733; text-anchor: middle; }
+    svg.topo .dt { font: 11px "Segoe UI", Arial, sans-serif; fill: #5d6b7a; text-anchor: middle; }
+    ol.tasks { padding-left: 22px; }
+    ol.tasks li { margin-bottom: 6px; }
+    .tabs { display: flex; gap: 6px; margin: 14px 0 0; flex-wrap: wrap; }
+    .tabs .tab { padding: 6px 14px; border: 1px solid var(--border); background: #fff; border-radius: 6px 6px 0 0; cursor: pointer; font-family: inherit; font-size: 14px; }
+    .tabs .tab.active { background: #0f1b2a; color: #d6f5d6; border-color: #0f1b2a; }
+    pre.term { margin: 0; background: #0f1b2a; color: #d6f5d6; font: 14px/1.5 Consolas, "Courier New", monospace; padding: 12px 14px; border-radius: 0 8px 0 8px; min-height: 180px; max-height: 320px; overflow: auto; white-space: pre-wrap; }
+    .term-input { display: flex; align-items: center; background: #0f1b2a; border-radius: 0 0 8px 8px; padding: 0 14px 12px; }
+    .term-prompt { color: #7ee787; font: 14px Consolas, "Courier New", monospace; white-space: nowrap; margin-right: 8px; }
+    .term-input input { flex: 1; background: transparent; border: 0; outline: none; color: #d6f5d6; font: 14px Consolas, "Courier New", monospace; }
+    ul.tasks-res { list-style: none; padding-left: 0; margin: 8px 0 0; }
+    ul.tasks-res li { font-size: 14px; margin-bottom: 4px; }
+    li.t-ok { color: var(--ok); }
+    li.t-bad { color: var(--bad); }
+    textarea.cli { width: 100%; font-family: Consolas, "Courier New", monospace; font-size: 15px; padding: 12px; border: 1px solid var(--border); border-radius: 7px; background: #0f1b2a; color: #d6f5d6; }
+    @media (max-width: 600px) { .card { padding: 16px; } .result-big { font-size: 36px; } .match-wrap { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>TryExam <span>· CCNA 200-301 v2.0 İmtahan Simulyatoru</span></h1>
+  <div id="examTimer" class="timer hidden">--:--:--</div>
+</header>
+
+<main>
+
+  <!-- START -->
+  <section id="screen-start" class="card">
+    <h2>CCNA 200-301 İmtahan Simulyatoru</h2>
+    <p>Bu simulyator <strong>CCNA 200-301 v2.0</strong> mövzuları üzrə müəllifin hazırladığı suallarla məşq imkanı verir. Müstəqil hazırlıq vasitəsidir; Cisco tərəfindən təsdiqlənmiş rəsmi imtahan deyil.</p>
+    <h3>İmtahan qaydaları</h3>
+    <ul class="rules">
+      <li>Müddət: <strong>120 dəqiqə</strong> (vaxt bitdikdə imtahan avtomatik tamamlanır)</li>
+      <li>Sual sayı: <strong>100</strong> (181 suallıq bankdan mövzu çəkilərinə uyğun seçilir)</li>
+      <li>Keçid həddi: <strong>80%</strong> və yuxarı (1000 baldan ən azı 800 bal)</li>
+      <li>Sual növləri: tək seçim, <strong>çoxlu seçim</strong>, <strong>matching (sürüklə-burax)</strong> və <strong>topologiya əsasında lab</strong> (IOS konsolunda sazlama tapşırıqları)</li>
+      <li>Çoxlu seçim, matching və lab suallarında bütün cavablar/tapşırıqlar düzgün olmalıdır (qismən bal verilmir)</li>
+      <li>Suallar arasında sərbəst keçid edə və onları işarələyə bilərsiniz</li>
+      <li>İrəliləyiş bu brauzerdə saxlanır; səhifə yenilənsə, vaxtı bitməmiş imtahana davam edə bilərsiniz</li>
+    </ul>
+    <h3>Mövzu çəkiləri</h3>
+    <div id="domainWeights" class="muted"></div>
+    <div class="btn-row">
+      <button class="btn" id="btnStart">İmtahana başla</button>
+      <button class="btn secondary" id="btnPractice">Qısa məşq (10 sual, vaxt məhdudiyyətsiz)</button>
+    </div>
+    <div class="disclaimer">Bu sertifikat TryExam hazırlığını tamamlama sənədidir; Cisco Systems tərəfindən verilən rəsmi CCNA sertifikatı deyil.</div>
+  </section>
+
+  <!-- EXAM -->
+  <section id="screen-exam" class="hidden">
+    <div class="card">
+      <div class="muted" id="examMeta"></div>
+      <div class="progress"><div id="progressBar" style="width:0%"></div></div>
+      <span class="domain-tag" id="qDomain"></span>
+      <h3 id="qText" style="font-size:18px;font-weight:600;"></h3>
+      <div id="qOptions"></div>
+      <div class="btn-row">
+        <button class="btn secondary" id="btnPrev">← Əvvəlki</button>
+        <button class="btn flag" id="btnFlag">İşarələ</button>
+        <button class="btn secondary" id="btnNext">Növbəti →</button>
+        <span style="flex:1"></span>
+        <button class="btn" id="btnSubmit">İmtahanı bitir</button>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Sual siyahısı</h3>
+      <div class="muted">Mavi: cavablandırılıb · Sarı: işarələnib · Çərçivəli: cari sual</div>
+      <div class="qnav" id="qNav"></div>
+    </div>
+  </section>
+
+  <!-- RESULTS -->
+  <section id="screen-results" class="hidden">
+    <div class="card" style="text-align:center;">
+      <div class="muted">Balınız (1000 üzərindən)</div>
+      <div class="result-big" id="scoreBig"></div>
+      <div id="passLine" style="font-size:18px;font-weight:600;"></div>
+      <div class="muted" id="resultMeta"></div>
+    </div>
+    <div class="card">
+      <h3>Mövzular üzrə nəticələr</h3>
+      <div id="domainResults"></div>
+    </div>
+    <div class="card">
+      <h3>Cavabların təhlili</h3>
+      <div id="review"></div>
+    </div>
+    <div class="btn-row">
+      <button class="btn hidden" id="btnCert">Sertifikat yarat</button>
+      <button class="btn secondary" id="btnRetry">Yenidən cəhd et</button>
+    </div>
+  </section>
+
+  <!-- CERTIFICATE -->
+  <section id="screen-cert" class="hidden">
+    <div class="card">
+      <h2>Təbriklər! Sertifikatınızı yaradın</h2>
+      <p class="muted">Sertifikatda görünəcək adınızı yazın. Ad yalnız sənədi yaratmaq üçün bu brauzerdə istifadə olunur; server-ə göndərilmir.</p>
+      <label for="certName">Ad və soyad</label>
+      <input type="text" id="certName" maxlength="60" placeholder="Məsələn, Əli Əliyev">
+      <div class="btn-row">
+        <button class="btn" id="btnMakeCert">Önbaxış yarat</button>
+      </div>
+      <canvas id="certCanvas" class="cert-preview hidden" width="1600" height="1131"></canvas>
+      <div class="btn-row hidden" id="certActions">
+        <button class="btn" id="btnDownloadPdf">PDF endir</button>
+        <button class="btn linkedin" id="btnLinkedin">LinkedIn-də paylaş</button>
+      </div>
+      <p class="muted hidden" id="linkedinHelp"></p>
+      <div class="disclaimer">
+        LinkedIn düyməsi profilin “Licenses & Certifications” bölməsinə əlavəetmə səhifəsini açır. Server üzərindən sertifikat yoxlanması yoxdur; nömrə yalnız sənədin identifikatorudur.
+      </div>
+    </div>
+    <div class="btn-row"><button class="btn secondary" id="btnBackResults">Nəticələrə qayıt</button></div>
+  </section>
+
+</main>
+
+<footer>
+  TryExam · <a href="https://www.cemaltaner.com.tr" target="_blank" rel="noopener">www.cemaltaner.com.tr</a> · Bu tətbiq Cisco Systems ilə əlaqəli deyil. Cisco və CCNA, Cisco Systems, Inc. şirkətinin ticarət nişanlarıdır.
+</footer>
+
+<!-- jsPDF: PDF üretimi için (cdnjs) -->
+<script src="pdf.js"></script>
+<script src="questions.js"></script>
+<script src="questions_extra.js"></script>
+<script src="questions_types.js"></script>
+<script src="questions_labs.js"></script>
+<script src="questions_hard.js"></script>
+<script src="questions_more.js"></script>
+<script src="lab.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
