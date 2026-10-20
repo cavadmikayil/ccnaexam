@@ -1,8 +1,5 @@
 # TryExam AZ — CCNA hazırlıq simulyatoru
 
-İstifadəçinin təqdim etdiyi `TryExam-main.zip` əsasında Azərbaycan dilinə uyğunlaşdırılıb.
-Orijinal layihə: https://github.com/ctaner/TryExam
-Orijinal müəllifin saytı və tətbiqdəki müəllif istinadı saxlanılıb.
 
 ## İstifadə
 
